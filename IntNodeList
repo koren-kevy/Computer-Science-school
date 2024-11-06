@@ -1,0 +1,50 @@
+public class IntNodeList
+{
+    private IntNode _head;
+    
+    public IntNodeList(IntNode head)
+    {
+        _head = (head != null) ? head : null;
+    }
+    
+    public IntNode getHead() { return _head; }
+    
+    public void SetHead(IntNode head) { _head = head; }
+    
+    public IntNode arrToNode(int[] arr)
+    {
+        IntNode temp = new IntNode (arr[0]);
+        for(int i = 1; i < arr.length; i++)
+        {
+            temp.setNext(new IntNode(arr[i]));
+        }
+        return temp;
+    }
+    
+    public IntNode getPrev(IntNode node)
+    {
+        if(_head == null || _head == node) { return null; }
+        IntNode behind = _head;
+        while(behind.getNext() != node)
+        {
+            behind = behind.getNext();
+        }
+        return behind;
+    }
+    
+    public IntNode lastNode()
+    {
+        IntNode temp = _head;
+        while(temp.getNext() != null)
+        {
+            temp = temp.getNext();
+        }
+        return temp;
+    }
+    
+    public void addToList(IntNode node) // Adding a node to the end of the list
+    {
+        IntNode temp = lastNode();
+        temp.setNext(node);
+    }
+}
