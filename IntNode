@@ -1,25 +1,25 @@
-public class IntNode
+ppublic class Intnode
 {
     private int _value;
-    private IntNode _next;
+    private Intnode _next;
     
-    public IntNode(int value)
+    public Intnode(int value)
     {
         _value = value;
         _next = null;
     }
     
-    public IntNode(int value, IntNode next)
+    public Intnode(int value, Intnode next)
     {
         _value = value;
         _next = next;
     }
     
-    public int getValue() { return _value; }
+    public int get_value() { return _value; }
     
-    public IntNode getNext() { return _next; }
+    public Intnode get_next() { return _next; }
     
-    public void setValue(int value) { _value = value; }
+    public void set_value(int value) { _value = value; }
     
-    public void setNext(IntNode next) { _next = next; }
+    public void set_next(Intnode next) { _next = next; }
 }
