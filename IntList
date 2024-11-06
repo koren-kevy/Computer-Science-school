@@ -1,7 +1,8 @@
 class IntList
 {
     private Intnode _head;
-
+    private final int DEFAULT_VAL = -1; // In case of an error
+    
     public IntList()
     {
         _head = null;
@@ -19,14 +20,14 @@ class IntList
     
     public Intnode next(Intnode node)
     {
-        return node.get_next();
+        return ((node != null) ? node.get_next() : null);
     }
     
     public Intnode get_head() { return _head; }
     
     public int getValue(Intnode node)
     {
-        return node.get_value();
+        return (node != null) ? node.get_value() : DEFAULT_VAL;
     }
     
     public void addToEnd(Intnode node)
@@ -117,17 +118,20 @@ class IntList
     public void printPointToPoint(int p1, int p2, IntList list)
     {
         int count = 0;
-        Intnode node = list.get_head();
-        while(count < Math.min(p1, p2))
+        if(list.get_head() != null)
         {
-            node = node.get_next();
-            count++;
-        }
-        while(count <= Math.max(p1, p2))
-        {
-            System.out.print(node.get_value() +"-->");
-            count++;
-            node = node.get_next();
+            Intnode node = list.get_head();
+            while(count < Math.min(p1, p2))
+            {
+                node = node.get_next();
+                count++;
+            }
+            while(count <= Math.max(p1, p2))
+            { 
+                System.out.print(node.get_value() +"-->");
+                count++;
+                node = node.get_next();
+            }
         }
         System.out.println("null");
     }
