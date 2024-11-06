@@ -1,0 +1,147 @@
+class IntList
+{
+    private Intnode _head;
+
+    public IntList()
+    {
+        _head = null;
+    }
+    
+    public IntList(Intnode head)
+    {
+        _head = (head != null) ? head : null;
+    }
+    
+    public boolean isEmpty()
+    {
+        return(_head == null);
+    }
+    
+    public Intnode next(Intnode node)
+    {
+        return node.get_next();
+    }
+    
+    public Intnode get_head() { return _head; }
+    
+    public int getValue(Intnode node)
+    {
+        return node.get_value();
+    }
+    
+    public void addToEnd(Intnode node)
+    {
+        if(_head == null) { _head = node; }
+        else
+        {
+            Intnode temp = _head;
+            while(temp.get_next() != null)
+            {
+                temp = temp.get_next();
+            }
+            temp.set_next(node);
+        }
+    }
+    
+    public void addToHead(Intnode node)
+    {
+        Intnode temp = _head;
+        _head = node;
+        node.set_next(temp);
+    }
+    
+    public void remove(int num)
+    {
+        if(_head != null)
+        {
+            Intnode behind = _head;
+            while(behind.get_next().get_value() != num)
+            {
+                behind = behind.get_next();
+            }
+            behind.set_next(behind.get_next().get_next());
+        }
+    }
+    
+    public void print()
+    {
+        Intnode temp = _head;
+        while(temp != null)
+        {
+            System.out.print(temp.get_value() +"-->");
+            temp = temp.get_next();
+        }
+        System.out.println("null");
+    }
+    
+    public int listLength()
+    {
+        int count = 0;
+        Intnode temp = _head;
+        while(temp != null)
+        {
+            count++;
+            temp = temp.get_next();
+        }
+        return count;
+    }
+    
+    public Intnode previousNode(Intnode node)
+    {
+        if(_head == null || _head == node) { return null; }
+        Intnode behind = _head;
+        while(behind.get_next() != null)
+        {
+            if(behind.get_next() == node) { return behind; }
+            else { behind = behind.get_next(); }
+        }
+        return behind;
+    }
+    
+    public void reverseList() 
+    {
+        if (_head == null || _head.get_next() == null) { return; }
+        Intnode current = _head;
+        Intnode previous = null;
+        Intnode next = null;
+        while (current != null) 
+        {
+            next = current.get_next();      
+            previous = previousNode(current); 
+            current.set_next(previous);      
+            current = next;                  
+        }
+        _head = previousNode(null);   
+    }
+    
+    public void printPointToPoint(int p1, int p2, IntList list)
+    {
+        int count = 0;
+        Intnode node = list.get_head();
+        while(count < Math.min(p1, p2))
+        {
+            node = node.get_next();
+            count++;
+        }
+        while(count <= Math.max(p1, p2))
+        {
+            System.out.print(node.get_value() +"-->");
+            count++;
+            node = node.get_next();
+        }
+        System.out.println("null");
+    }
+    
+    public Intnode arrToList(int[] arr)
+    {
+        if(arr.length == 0) { return null; }
+        Intnode head = new Intnode(arr[0]);
+        Intnode current = head;
+        for(int i = 1; i < arr.length; i++)
+        {
+            current.set_next(new Intnode(arr[i]));
+            current = current.get_next();
+        }
+        return head;
+    }
+}
