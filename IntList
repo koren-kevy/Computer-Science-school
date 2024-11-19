@@ -75,10 +75,10 @@ class IntList
         System.out.println("null");
     }
     
-    public int listLength()
+    public int listLength(IntList list)
     {
         int count = 0;
-        Intnode temp = _head;
+        Intnode temp = list.get_head();
         while(temp != null)
         {
             count++;
@@ -147,5 +147,26 @@ class IntList
             current = current.get_next();
         }
         return head;
+    }
+    
+    private boolean isBalanced(IntList list)
+    {
+        int sum = 0;
+        double average = 0;
+        Intnode temp = list.get_head();
+        while(temp.get_next() != null)
+        {
+           sum += temp.get_value(); 
+        }
+        average = sum / listLength(list); 
+        
+        int above = 0; int below = 0;
+        temp = list.get_head();
+        while(temp.get_next() != null)
+        {
+            if(temp.get_value() > average) { above++; }
+            if(temp.get_value() < average) { below++; }
+        }
+        return(above == below);
     }
 }
